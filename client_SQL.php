@@ -48,7 +48,7 @@ include 'conexion_SQL2.php';
   						</thead>
   						<tbody>
                 '.$clientes.'
-                <tr><td colspan="2">Total Registros: <b>'.$n.'</b></td></tr>
+                <tr><td colspan="3">Total Registros: <b>'.$n.'</b></td></tr>
               </tbody>
             </table>
           </div>
