@@ -1,18 +1,18 @@
 <?php
 include 'conexion_SQL2.php';
-  $titulo='Productos';
-  $query = $db->query('SELECT * FROM dbo.INVE01');
-  $n=0;$productos='';
+  $titulo='Clientes';
+  $query = $db->query('SELECT * FROM dbo.CLIE01');
+  $n=0;$clientes='';
   $query->execute();
   while($row = $query->fetch(PDO::FETCH_ASSOC)){$n++;
-    $clave=$row['CVE_ART'];
-    $descr=$row['DESCR'];
-    $des=htmlentities($descr, ENT_COMPAT,'ISO-8859-1', true);
-    $productos.='
+    $cve=$row['CLAVE'];
+    $nom=htmlentities($row['NOMBRE'], ENT_COMPAT,'ISO-8859-1', true);
+    $rfc=$row['RFC'];
+    $clientes.='
     <tr>
-        <td>'.$n.'</td>
-        <td>'.$clave.'</td>
-        <td>'.$des.'</td>
+        <td>'.$cve.'</td>
+        <td>'.$nom.'</td>
+        <td>'.$rfc.'</td>
     </tr>';
   }
 
@@ -41,13 +41,13 @@ include 'conexion_SQL2.php';
   					<table class="table table-hover" id="task-table">
   						<thead>
   							<tr>
-  								<th>#</th>
   								<th>CLAVE</th>
-  								<th>DESCRIPCION</th>
+  								<th>NOMBRE</th>
+  								<th>RFC</th>
   							</tr>
   						</thead>
   						<tbody>
-                '.$productos.'
+                '.$clientes.'
                 <tr><td colspan="2">Total Registros: <b>'.$n.'</b></td></tr>
               </tbody>
             </table>
