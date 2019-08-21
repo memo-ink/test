@@ -2,6 +2,9 @@
 include 'conexion_SQL2.php';
 
   $query = $db->query('SELECT * FROM dbo.INVE01');
+  $n=0;
+  $query->execute();
+  //while($row1 = $query->fetch(PDO::FETCH_ASSOC)){$n++;}
   $resultado='
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -34,11 +37,10 @@ include 'conexion_SQL2.php';
   						</thead>
   						<tbody>
   ';
-  $n=0;
-  $query->execute();
   while($row = $query->fetch(PDO::FETCH_ASSOC)){$n++;
     $clave=$row['CVE_ART'];
-    $des=$row['DESCR'];
+    $descr=$row['DESCR'];
+    $des=htmlentities($descr, ENT_COMPAT,'ISO-8859-1', true);
     $resultado.='
     <tr>
         <td>'.$n.'</td>
@@ -46,7 +48,7 @@ include 'conexion_SQL2.php';
         <td>'.$des.'</td>
     </tr>';
   }
-  $resultado.='<tr><td colspan="2">Total Registros: '.$n.'</td></tr>';
+  $resultado.='<tr><td colspan="2">Total Registros: <b>'.$n.'</b></td></tr>';
   $resultado.='
   </tbody>
 </table>
@@ -56,5 +58,4 @@ include 'conexion_SQL2.php';
 </div>';
 
 echo $resultado;
-sqlsrv_close($mssql);
-?>
+//sqlsrv_close($db);
